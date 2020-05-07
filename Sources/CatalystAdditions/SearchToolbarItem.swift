@@ -52,5 +52,6 @@ extension SearchToolbarItem: WrapNSSearchFieldDelegate {
     @objc optional func searchFieldDidStartSearching(_ sender: Any)
     @objc optional func searchFieldDidEndSearching(_ sender: Any)
     @objc optional func controlTextDidChange(_ obj: Notification)
+    @objc optional func controlTextDidEndEditing(_ obj: Notification)
 }
 #endif
