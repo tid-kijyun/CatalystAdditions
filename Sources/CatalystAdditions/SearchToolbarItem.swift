@@ -12,11 +12,14 @@ import SwiftUI
 @available(iOS, deprecated: 14.0, message: "There is a possibility that new method have been added to Apple's framework. If so, you should use it.")
 public final class SearchToolbarItem: NSToolbarItem {
     public typealias TextChanged = ((String) -> Void)
+    public typealias TextReturned = ((String) -> Void)
 
     private let textChanged: TextChanged
+    private let textReturned: TextReturned
 
-    public init(itemIdentifier: NSToolbarItem.Identifier, textChanged: @escaping TextChanged) {
+    public init(itemIdentifier: NSToolbarItem.Identifier, textChanged: @escaping TextChanged, textReturned: @escaping TextReturned) {
         self.textChanged = textChanged
+        self.textReturned = textReturned
         super.init(itemIdentifier: itemIdentifier)
 
         self.label = "Search"
@@ -45,6 +48,14 @@ extension SearchToolbarItem: WrapNSSearchFieldDelegate {
             return
         }
         textChanged(text)
+    }
+    
+    func controlTextDidEndEditing(_ notification: Notification) {
+        guard let notificationDictionary = notification.userInfo,
+        notificationDictionary["_NSFirstResponderReplacingFieldEditor"] == nil,
+        let text = getSearchText(notification.object) else { return }
+        
+        textReturned(text)
     }
 }
 
