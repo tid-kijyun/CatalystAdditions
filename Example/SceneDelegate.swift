@@ -84,7 +84,7 @@ extension SceneDelegate: NSToolbarDelegate {
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         switch itemIdentifier {
         case .search:
-            let item = SearchToolbarItem(itemIdentifier: Toolbar.search, textChanged: { (textChanged) in
+            let item = SearchToolbarItem(itemIdentifier: .search, textChanged: { (textChanged) in
                 print(textChanged)
             }) { (textReturned) in
                 print(textReturned)
