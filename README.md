@@ -34,6 +34,11 @@ import CatalystAdditions
 let item = SearchToolbarItem(itemIdentifier: .search) { text in
     // do something
 }
+let item = SearchToolbarItem(itemIdentifier: .search, textChanged: { (textChanged) in
+    // update search results as the user is typing
+}) { (textReturned) in
+    // update search results only after return/enter key is pressed
+}
 ```
 <details><summary>Screenshot</summary>
 
